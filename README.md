@@ -9,7 +9,7 @@ curl https://github.com/tanrax/terminal-calcular-IVA-y-IRPF/raw/master/dist/calc
 ## Uso
 
 ``` bash
-java -jar calcular_iva-0.1.0-standalone.jar [numero]
+java -jar calcular_iva-1.0.0-standalone.jar [numero]
 ```
 
 ## Ejemplo
@@ -17,7 +17,7 @@ java -jar calcular_iva-0.1.0-standalone.jar [numero]
 Calculamos los impuestos de 300 euros.
 
 ``` bash
-java -jar calcular_iva-0.1.0-standalone.jar 300
+java -jar calcular_iva-1.0.0-standalone.jar 300
 ```
 
 Nos devolverá.
