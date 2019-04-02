@@ -2,7 +2,9 @@
 
 ## Descargar
 
-curl /target/uberjar/calcular_iva-1.0.0-standalone.ja
+``` bash
+curl https://github.com/tanrax/terminal-calcular-IVA-y-IRPF/raw/master/dist/calcular_iva-1.0.0-standalone.jar --output calcular_iva-1.0.0-standalone.jar
+```
 
 ## Uso
 
