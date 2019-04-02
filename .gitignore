@@ -4,5 +4,7 @@ pom.xml.asc
 *.class
 /.lein-*
 /.nrepl-port
+/target
 .hgignore
 .hg/
+!dist/*.jar
