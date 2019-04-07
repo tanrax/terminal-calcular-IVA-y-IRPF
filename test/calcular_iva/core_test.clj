@@ -2,6 +2,10 @@
   (:require [clojure.test :refer :all]
             [calcular-iva.core :refer :all]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest porcentajesDePago-100-test
+  (testing "Porcentaje de Pago"
+    " Cifra exacta"
+    (is
+     (= (porcentajesDePago 100) [100 40 40]))
+    (is
+     (= (porcentajesDePago "text") nil))))
