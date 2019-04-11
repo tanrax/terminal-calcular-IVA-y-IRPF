@@ -5,42 +5,44 @@
 (def IVA 21)
 (def IRPF 15)
 
-(defn parse-int [s]
-   (Integer. (re-find  #"\d+" s )))
+(defn fixDecimalsToPrice
+  "Arregla los decimales para el precio"
+  [inNumber]
+  (clojure.string/replace (format "%.2f" (Float. (str inNumber))) #"\.00" ""))
+
+(defn calcWithIVA
+  "Calcula precio con IVA"
+  [number]
+  (* number (/ IVA 100)))
+
+(defn calcWithIRPF
+  "Calcula precio con IRPF"
+  [number]
+  (* number (/ IRPF 100)))
 
 (defn formatNumberToEuros
   "Format number to euros"
   [inNumber]
-  (def insNumber (str inNumber))
-  (str 
-    (if (re-find #"\.0$" insNumber) 
-      (parse-int insNumber)
-      (format "%.2f" (Float. inNumber))
-      ) "€"))
-
+  (str (fixDecimalsToPrice inNumber) "€"))
 
 (defn facturaSencilla
   "Muestra datos de una factura secilla"
   [inNumber]
   (def number (Float. (str inNumber)))
-  (def numberWithIVA (* number (/ IVA 100)))
-  (def numberWithIRPF (* number (/ IRPF 100)))
   (prn (str "FACTURA sencilla"))
   (prn (str "Introducida: " (formatNumberToEuros number)))
-  (prn (str "IVA (+" IVA "%): " (formatNumberToEuros numberWithIVA)))
-  (prn (str "IRPF (-" IRPF "%): " (formatNumberToEuros numberWithIRPF)))
-  (prn (str "Total: " (formatNumberToEuros (- (+ number numberWithIVA) numberWithIRPF)))))
+  (prn (str "IVA (+" IVA "%): " (formatNumberToEuros (calcWithIVA number))))
+  (prn (str "IRPF (-" IRPF "%): " (formatNumberToEuros (calcWithIRPF number))))
+  (prn (str "Total: " (formatNumberToEuros (- (+ number (calcWithIVA number)) (calcWithIRPF number))))))
 
 (defn facturaEducacion
   "Muestra datos de una factura secilla"
   [inNumber]
   (def number (Float. (str inNumber)))
-  (def numberWithIVA (* number (/ IVA 100)))
-  (def numberWithIRPF (* number (/ IRPF 100)))
   (prn (str "FACTURA educacion"))
   (prn (str "Introducida: " (formatNumberToEuros number)))
-  (prn (str "IRPF (-" IRPF "%): " (formatNumberToEuros numberWithIRPF)))
-  (prn (str "Total: " (formatNumberToEuros (- number numberWithIRPF)))))
+  (prn (str "IRPF (-" IRPF "%): " (formatNumberToEuros (calcWithIRPF number))))
+  (prn (str "Total: " (formatNumberToEuros (- number (calcWithIRPF number))))))
 
 (defn porcentajesDePago
   "Muestra los porcentajes de pago 40%, 40% y 20%"
@@ -51,7 +53,7 @@
   (prn (str "40% - " (formatNumberToEuros number40)))
   (prn (str "40% - " (formatNumberToEuros number40)))
   (prn (str "20% - " (formatNumberToEuros number20)))
-  [number number40 number20])
+  [(fixDecimalsToPrice number40) (fixDecimalsToPrice number40) (fixDecimalsToPrice number20)])
 
 (defn -main
   "Calc IVA and IRPF"
