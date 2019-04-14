@@ -2,6 +2,14 @@
   (:require [clojure.test :refer :all]
             [calcular-iva.core :refer :all]))
 
+(deftest fixDecimalsToPriceTest
+  (testing "Fix decimals to Price"
+    "Formatod de decimales a precio"
+    (is (= (fixDecimalsToPrice 101) "101"))
+    (is (= (fixDecimalsToPrice 10.1) "10.10"))
+    (is (= (fixDecimalsToPrice 10.04) "10.04"))
+    (is (= (fixDecimalsToPrice 10.1234) "10.12"))))
+
 (deftest porcentajesDePago-100-test
   (testing "Porcentaje de Pago"
     " Cifra exacta"
@@ -19,13 +27,13 @@
  
 (deftest calcIVA
   (testing "Calcula IVA"
-    (is (= (calcWithIVA 100) 21))
-    (is (= (eval (calcWithIVA 110)) 23.1))
+    (is (= (float (calcWithIVA 100)) 21.0))
+    (is (= (str (float(calcWithIVA 110))) "23.1"))
     (is (= (calcWithIVA 0) 0))))
 
 (deftest calcIRPF
   (testing "Calcula IRPF"
-    (is (= (eval (calcWithIRPF 100)) 15))
-    (is (= (eval (calcWithIRPF 110)) 16.5))
+    (is (= (calcWithIRPF 100) 15))
+    (is (= (float (calcWithIRPF 110)) 16.5))
     (is (= (calcWithIRPF 0) 0))))
 
