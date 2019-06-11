@@ -2,27 +2,13 @@
 
 ## Descargar
 
-Binario
-
-``` bash
-curl https://github.com/tanrax/terminal-calcular-IVA-y-IRPF/raw/master/dist/calcular_iva --output calcular_iva
-```
-
-O versión jar (Java)
-
-``` bash
+``` sh
 curl https://github.com/tanrax/terminal-calcular-IVA-y-IRPF/raw/master/dist/calcular_iva-1.0.1-standalone.jar --output calcular_iva-1.0.1-standalone.jar
 ```
 
 ## Uso
 
-``` bash
-./calcular_iva [numero]
-```
-
-o
-
-``` bash
+``` sh
 java -jar calcular_iva-1.0.1-standalone.jar [numero]
 ```
 
@@ -30,13 +16,13 @@ java -jar calcular_iva-1.0.1-standalone.jar [numero]
 
 Calculamos los impuestos de 345 euros.
 
-``` bash
+``` sh
 java -jar calcular_iva-1.0.1-standalone.jar 345
 ```
 
 Nos devolverá.
 
-``` bash
+``` sh
 "FACTURA sencilla"
 "Introducida: 345€"
 "IVA (+21%): 72.45€"
@@ -47,4 +33,14 @@ Nos devolverá.
 "Introducida: 345€"
 "IRPF (-15%): 51.75€"
 "Total: 293.25€"
+```
+
+## Compila un binario para ejecutar nativamente en tu sistema
+
+Instala Graalvm, y a continuación.
+
+``` sh
+git clone https://github.com/tanrax/terminal-calcular-IVA-y-IRPF.git
+cd terminal-calcular-IVA-y-IRPF
+make
 ```
